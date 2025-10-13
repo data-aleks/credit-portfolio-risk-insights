@@ -10,5 +10,9 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_QueryOrder = ["credit_risk_data credit_risk_dataset"]
+
+ref table 'credit_risk_data credit_risk_dataset'
+
 ref cultureInfo en-GB
 

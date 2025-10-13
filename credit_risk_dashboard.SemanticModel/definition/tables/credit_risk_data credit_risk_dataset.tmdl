@@ -1,0 +1,123 @@
+table 'credit_risk_data credit_risk_dataset'
+	lineageTag: eae9ee2b-10b6-47b0-9d02-59d3f9a8182b
+
+	column person_age
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f58d116-b6e8-47e0-954f-57b1d24d8dc2
+		summarizeBy: sum
+		sourceColumn: person_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_income
+		dataType: int64
+		formatString: 0
+		lineageTag: 42a41bbb-7bdb-42ce-97f2-b0082fc2f599
+		summarizeBy: sum
+		sourceColumn: person_income
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_home_ownership
+		dataType: string
+		lineageTag: e4b54579-c29c-4ea2-8179-a3b7f7f43ddf
+		summarizeBy: none
+		sourceColumn: person_home_ownership
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_emp_length
+		dataType: double
+		lineageTag: 72e99c27-d03c-4f14-aac0-c25ba0fb741d
+		summarizeBy: sum
+		sourceColumn: person_emp_length
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column loan_intent
+		dataType: string
+		lineageTag: 7623b3f3-b62f-4d43-98f2-d856a6ead936
+		summarizeBy: none
+		sourceColumn: loan_intent
+
+		annotation SummarizationSetBy = Automatic
+
+	column loan_grade
+		dataType: string
+		lineageTag: fadadc87-9727-492e-9860-fa9dd30a9079
+		summarizeBy: none
+		sourceColumn: loan_grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column loan_amnt
+		dataType: int64
+		formatString: 0
+		lineageTag: 4abfbbfa-b71f-47f0-b7b3-2fed00c06638
+		summarizeBy: sum
+		sourceColumn: loan_amnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column loan_int_rate
+		dataType: double
+		lineageTag: f66d6823-b2df-4d24-ad48-4c2364b8da11
+		summarizeBy: sum
+		sourceColumn: loan_int_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column loan_status
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b33d255-8b0f-45d3-917c-44cc24543219
+		summarizeBy: sum
+		sourceColumn: loan_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column loan_percent_income
+		dataType: double
+		lineageTag: a2be19bf-3376-400d-b1c3-9e72b05ed3b8
+		summarizeBy: sum
+		sourceColumn: loan_percent_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cb_person_default_on_file
+		dataType: string
+		lineageTag: f82e0d22-ff9f-40d6-890e-b844704d6fbe
+		summarizeBy: none
+		sourceColumn: cb_person_default_on_file
+
+		annotation SummarizationSetBy = Automatic
+
+	column cb_person_cred_hist_length
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a491248-dd94-40eb-b73b-dcd5cac0144c
+		summarizeBy: sum
+		sourceColumn: cb_person_cred_hist_length
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'credit_risk_data credit_risk_dataset' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "credit_risk_data", [ReturnSingleDatabase=true]),
+				    credit_risk_data_credit_risk_dataset = Source{[Schema="credit_risk_data",Item="credit_risk_dataset"]}[Data]
+				in
+				    credit_risk_data_credit_risk_dataset
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
