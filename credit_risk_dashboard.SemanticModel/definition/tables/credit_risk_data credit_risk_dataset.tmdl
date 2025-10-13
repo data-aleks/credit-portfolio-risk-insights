@@ -1,0 +1,143 @@
+table 'credit_risk_data credit_risk_dataset'
+	lineageTag: eae9ee2b-10b6-47b0-9d02-59d3f9a8182b
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f58d116-b6e8-47e0-954f-57b1d24d8dc2
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column income
+		dataType: decimal
+		formatString: 0
+		lineageTag: 42a41bbb-7bdb-42ce-97f2-b0082fc2f599
+		summarizeBy: sum
+		sourceColumn: income
+
+		annotation SummarizationSetBy = Automatic
+
+	column residential_status
+		dataType: string
+		lineageTag: e4b54579-c29c-4ea2-8179-a3b7f7f43ddf
+		summarizeBy: none
+		sourceColumn: residential_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column employment_length
+		dataType: double
+		lineageTag: 72e99c27-d03c-4f14-aac0-c25ba0fb741d
+		summarizeBy: sum
+		sourceColumn: employment_length
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column purpose
+		dataType: string
+		lineageTag: 7623b3f3-b62f-4d43-98f2-d856a6ead936
+		summarizeBy: none
+		sourceColumn: purpose
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade
+		dataType: string
+		lineageTag: fadadc87-9727-492e-9860-fa9dd30a9079
+		summarizeBy: none
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: decimal
+		formatString: 0
+		lineageTag: 4abfbbfa-b71f-47f0-b7b3-2fed00c06638
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column loan_to_income
+		dataType: double
+		lineageTag: a2be19bf-3376-400d-b1c3-9e72b05ed3b8
+		summarizeBy: sum
+		sourceColumn: loan_to_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column historic_defaults
+		dataType: string
+		lineageTag: f82e0d22-ff9f-40d6-890e-b844704d6fbe
+		summarizeBy: none
+		sourceColumn: historic_defaults
+
+		annotation SummarizationSetBy = Automatic
+
+	column credit_history_length
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a491248-dd94-40eb-b73b-dcd5cac0144c
+		summarizeBy: sum
+		sourceColumn: credit_history_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column record_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c813ceaf-9d8f-4ed6-9564-f54fd4c1a30e
+		summarizeBy: sum
+		sourceColumn: record_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: c42f8016-cf58-4db9-9f0f-ab865057aedb
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column interest_rate
+		dataType: double
+		lineageTag: 5e0b92c8-32fc-4bf7-a44e-1365958de2de
+		summarizeBy: sum
+		sourceColumn: interest_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'credit_risk_data credit_risk_dataset' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "credit_risk_data", [ReturnSingleDatabase=true]),
+				    credit_risk_data_credit_risk_dataset = Source{[Schema="credit_risk_data",Item="credit_risk_dataset"]}[Data],
+				    #"Added Index" = Table.AddIndexColumn(credit_risk_data_credit_risk_dataset, "Index", 0, 1, Int64.Type),
+				    #"Renamed Columns [index]" = Table.RenameColumns(#"Added Index",{{"Index", "record_id"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns [index]",{"record_id", "person_age", "person_income", "person_home_ownership", "person_emp_length", "loan_intent", "loan_grade", "loan_amnt", "loan_int_rate", "loan_status", "loan_percent_income", "cb_person_default_on_file", "cb_person_cred_hist_length"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"loan_intent", "purpose"}, {"loan_amnt", "amount"}, {"loan_int_rate", "interest_rate"}, {"loan_percent_income", "loan_to_income"}, {"cb_person_default_on_file", "historic_defaults"}, {"cb_person_cred_hist_length", "credit_history_length"}, {"loan_grade", "grade"}, {"person_emp_length", "employment_length"}, {"person_home_ownership", "residential_status"}, {"person_income", "income"}, {"person_age", "age"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"loan_to_income", Percentage.Type}, {"amount", Currency.Type}, {"income", Currency.Type}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Changed Type", "status", each if [loan_status] = 1 then "Default" else if [loan_status] = 0 then "Active" else null),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"loan_status"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Columns", "interest_rate_n", each [interest_rate] / 100),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"interest_rate"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"interest_rate_n", "interest_rate"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"interest_rate", Percentage.Type}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type1",{{"purpose", Text.Proper, type text}, {"residential_status", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
