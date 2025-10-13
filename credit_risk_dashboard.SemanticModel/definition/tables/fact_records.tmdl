@@ -1,6 +1,80 @@
 table fact_records
 	lineageTag: 224d8f87-ac17-48ca-ad9b-27f841baa924
 
+	measure 'Default Records' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_records[record_id]),
+			    FILTER(dim_status, dim_status[status] = "Default"),
+			    FILTER(dim_client, dim_client[age] <= 30)
+			)
+		formatString: 0
+		displayFolder: [Age Below 30]
+		lineageTag: f83eb75c-cff4-4701-a10a-ab7b27dcc9d2
+
+	measure 'Total Records' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_client, dim_client[age] <= 30))
+		formatString: 0
+		displayFolder: [Age Below 30]
+		lineageTag: 0caec8ef-cac7-47c1-979b-53b1086f328d
+
+	measure 'Default Rate' = fact_records[Default Records] / fact_records[Total Records]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: [Age Below 30]
+		lineageTag: 517d3640-abec-4dc0-91ba-5e9c59f64f95
+
+	measure 'Default Loss' = CALCULATE(SUM(fact_records[amount]), FILTER(dim_status, dim_status[status] = "Default"), FILTER(dim_client, dim_client[age] <= 30) )
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		displayFolder: [Age Below 30]
+		lineageTag: 6fb271c0-11eb-4cb6-ac8a-d99c00266e87
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Active Amount' = ```
+			CALCULATE(SUM(fact_records[amount]), FILTER(dim_status, dim_status[status] = "Active"), FILTER(dim_client, dim_client[age] <= 30)) 
+			```
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		displayFolder: [Age Below 30]
+		lineageTag: d071adf0-2209-4b7f-8e92-3b5513338bc1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Active 30+ Amount' = ```
+			CALCULATE(SUM(fact_records[amount]), FILTER(dim_status, dim_status[status] = "Active"), FILTER(dim_client, dim_client[age] > 30 && dim_client[age] <= 65)) 
+			```
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		displayFolder: [Age 30 - 100]
+		lineageTag: 7fded6c8-e62c-4abe-b6b5-3101ff3e8f87
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Default Loss 30+' = CALCULATE(SUM(fact_records[amount]), FILTER(dim_status, dim_status[status] = "Default"), FILTER(dim_client, dim_client[age] > 30 && dim_client[age] <= 100) )
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		displayFolder: [Age 30 - 100]
+		lineageTag: eab71881-f5e5-4259-aa10-7aa42bf3d238
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Default Records 30+' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_records[record_id]),
+			    FILTER(dim_status, dim_status[status] = "Default"),
+			    FILTER(dim_client, dim_client[age] > 30 && dim_client[age] <= 100)
+			)
+		formatString: 0
+		displayFolder: [Age 30 - 100]
+		lineageTag: 544d7113-1368-4256-9d93-050db2c6ce1a
+
+	measure 'Default Rate 30+' = fact_records[Default Records 30+] / fact_records[Total Records 30+]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: [Age 30 - 100]
+		lineageTag: c9a78b10-8b28-48fb-bb1c-378db9312ab8
+
+	measure 'Total Records 30+' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_client, dim_client[age] > 30 && dim_client[age] <= 100))
+		formatString: 0
+		displayFolder: [Age 30 - 100]
+		lineageTag: 723d609b-c8f1-4dbd-a7c6-8f3852fcf9d4
+
 	column record_id
 		dataType: int64
 		formatString: 0
@@ -23,13 +97,12 @@ table fact_records
 
 	column interest_rate
 		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 81d44b95-1edf-4568-8bb8-b79e1e9cd14b
 		summarizeBy: sum
 		sourceColumn: interest_rate
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column client_key
 		dataType: int64

@@ -23,6 +23,8 @@ table dim_client
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"dim_client","TableItemName":"Age Bins","ObjectType":4},"LinkType":"UsedInGroup"}]
+
 	column income
 		dataType: decimal
 		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
@@ -33,6 +35,8 @@ table dim_client
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"dim_client","TableItemName":"Income Bins","ObjectType":4},"LinkType":"UsedInGroup"}]
 
 	column employment_length
 		dataType: double
@@ -69,6 +73,82 @@ table dim_client
 		sourceColumn: residential_status_key
 
 		annotation SummarizationSetBy = Automatic
+
+	column 'Age Bins' =
+			IF(
+				ISBLANK('dim_client'[age]),
+				BLANK(),
+				INT('dim_client'[age])
+			)
+		formatString: 0
+		lineageTag: 2a49264d-8a3d-4fff-9873-54350a2b96f3
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "dim_client"
+				          }
+				        },
+				        "Property": "age"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 1.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"dim_client"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}},"Size":1.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Income Bins' =
+			IF(
+				ISBLANK('dim_client'[income]),
+				BLANK(),
+				INT('dim_client'[income] / 10000) * 10000
+			)
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 181c3b4f-07ee-40f0-8ba2-5f8265776505
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "dim_client"
+				          }
+				        },
+				        "Property": "income"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 10000.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"dim_client"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"income"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"income"}},"Size":10000.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
 
 	partition dim_client = m
 		mode: import
