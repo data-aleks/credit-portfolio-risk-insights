@@ -133,9 +133,15 @@ table 'credit_risk_data credit_risk_dataset'
 				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"interest_rate"}),
 				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"interest_rate_n", "interest_rate"}}),
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"interest_rate", Percentage.Type}}),
-				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type1",{{"purpose", Text.Proper, type text}, {"residential_status", Text.Proper, type text}})
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type1",{{"purpose", Text.Proper, type text}, {"residential_status", Text.Proper, type text}}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Capitalized Each Word",{"record_id", "status", "purpose", "amount", "interest_rate", "age", "income", "residential_status", "employment_length", "grade", "historic_defaults", "credit_history_length", "loan_to_income"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Reordered Columns1","Debtconsolidation","Debt Consolidation",Replacer.ReplaceText,{"purpose"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Homeimprovement","Home Improvements",Replacer.ReplaceText,{"purpose"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","Y","Yes",Replacer.ReplaceText,{"historic_defaults"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","N","No",Replacer.ReplaceText,{"historic_defaults"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value3", each ([age] <> 123 and [age] <> 144))
 				in
-				    #"Capitalized Each Word"
+				    #"Filtered Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 
