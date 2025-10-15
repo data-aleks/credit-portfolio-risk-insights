@@ -1,13 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "56fc14b9286d893d919c",
   "position": {
     "x": 16.666666666666668,
     "y": 710,
     "z": 2000,
     "height": 340,
-    "width": 640,
-    "tabOrder": 1000
+    "width": 640
   },
   "visual": {
     "visualType": "columnChart",
