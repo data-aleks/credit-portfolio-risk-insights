@@ -8,10 +8,6 @@ relationship AutoDetected_ff7e1759-9b0e-4f0b-a01c-2d217daef34c
 	fromColumn: fact_records.grade_key
 	toColumn: dim_grade.grade_key
 
-relationship AutoDetected_f069eb25-7a49-4e6c-9808-8fcb040a4829
-	fromColumn: fact_records.purpose_key
-	toColumn: dim_purpose.purpose_key
-
 relationship AutoDetected_0656d5eb-e5fc-49ac-b20d-8ffb2b3fa5ce
 	fromColumn: dim_client.residential_status_key
 	toColumn: dim_residential_status.residential_status_key
@@ -19,4 +15,8 @@ relationship AutoDetected_0656d5eb-e5fc-49ac-b20d-8ffb2b3fa5ce
 relationship AutoDetected_7b24676e-12f7-48a6-8467-e5d0a2b075ad
 	fromColumn: fact_records.status_key
 	toColumn: dim_status.status_key
+
+relationship 4ce2c725-b1a9-f774-382c-108aa943c13f
+	fromColumn: fact_records.purpose_key
+	toColumn: dim_purpose.purpose_key
 

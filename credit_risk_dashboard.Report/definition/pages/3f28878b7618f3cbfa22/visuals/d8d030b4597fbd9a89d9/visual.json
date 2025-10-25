@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "d8d030b4597fbd9a89d9",
+  "position": {
+    "x": 396.66666666666663,
+    "y": 0,
+    "z": 2,
+    "height": 287.77777777777777,
+    "width": 400,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "pythonVisual",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_status"
+                    }
+                  },
+                  "Property": "status_binary"
+                }
+              },
+              "queryRef": "dim_status.status_binary",
+              "nativeQueryRef": "status_binary"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_records"
+                    }
+                  },
+                  "Property": "risk_score"
+                }
+              },
+              "queryRef": "fact_records.risk_score",
+              "nativeQueryRef": "risk_score"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "script": [
+        {
+          "properties": {
+            "source": {
+              "expr": {
+                "Literal": {
+                  "Value": "'# The following code to create a dataframe and remove duplicated rows is always executed and acts as a preamble for your script: \n\n# dataset = pandas.DataFrame(status_binary, risk_level)\n# dataset = dataset.drop_duplicates()\n\n# Paste or type your script code here:\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.metrics import precision_score, recall_score, f1_score\n\ndf = dataset.copy()\ny_true = df[''status_binary'']\ny_prob = df[''risk_score'']\n\n# Evaluate metrics across thresholds\nthresholds = [i/100 for i in range(10, 90, 5)]  # 0.10 to 0.85\nresults = []\n\nfor t in thresholds:\n    y_pred = (y_prob > t).astype(int)\n    precision = precision_score(y_true, y_pred)\n    recall = recall_score(y_true, y_pred)\n    f1 = f1_score(y_true, y_pred)\n    results.append((t, precision, recall, f1))\n\n# Convert to DataFrame\nmetrics_df = pd.DataFrame(results, columns=[''Threshold'', ''Precision'', ''Recall'', ''F1''])\n\n# Plot\nplt.figure(figsize=(8, 5))\nplt.plot(metrics_df[''Threshold''], metrics_df[''Precision''], label=''Precision'', marker=''o'')\nplt.plot(metrics_df[''Threshold''], metrics_df[''Recall''], label=''Recall'', marker=''o'')\nplt.plot(metrics_df[''Threshold''], metrics_df[''F1''], label=''F1-score'', marker=''o'')\nplt.xlabel(''Threshold'')\nplt.ylabel(''Score'')\nplt.title(''Model Metrics Across Thresholds'')\nplt.legend()\nplt.grid(True)\nplt.tight_layout()\nplt.show()'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Python'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

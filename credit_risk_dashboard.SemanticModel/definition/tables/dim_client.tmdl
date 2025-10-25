@@ -48,6 +48,8 @@ table dim_client
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"dim_client","TableItemName":"Employment Length Bins","ObjectType":4},"LinkType":"UsedInGroup"}]
+
 	column historic_defaults
 		dataType: string
 		lineageTag: 984696a4-2e93-4e32-8f4c-e653c8ca0845
@@ -149,6 +151,48 @@ table dim_client
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Employment Length Bins' =
+			IF(
+				ISBLANK('dim_client'[employment_length]),
+				BLANK(),
+				IF(
+					'dim_client'[employment_length] >= 0,
+					ROUNDDOWN('dim_client'[employment_length], 0),
+					ROUNDUP('dim_client'[employment_length], 0)
+				)
+			)
+		lineageTag: fbd21ebb-1eb9-4df9-af15-7ba01d4050e9
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "dim_client"
+				          }
+				        },
+				        "Property": "employment_length"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 1.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"dim_client"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"employment_length"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"employment_length"}},"Size":1.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition dim_client = m
 		mode: import

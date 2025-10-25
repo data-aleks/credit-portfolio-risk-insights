@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "002cee46983fcd1e29eb",
+  "position": {
+    "x": 796.66666666666663,
+    "y": 0,
+    "z": 1,
+    "height": 286.66666666666669,
+    "width": 400,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "pythonVisual",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_status"
+                    }
+                  },
+                  "Property": "status_binary"
+                }
+              },
+              "queryRef": "dim_status.status_binary",
+              "nativeQueryRef": "status_binary"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_records"
+                    }
+                  },
+                  "Property": "risk_score"
+                }
+              },
+              "queryRef": "fact_records.risk_score",
+              "nativeQueryRef": "risk_score"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "script": [
+        {
+          "properties": {
+            "source": {
+              "expr": {
+                "Literal": {
+                  "Value": "'# The following code to create a dataframe and remove duplicated rows is always executed and acts as a preamble for your script: \n\n# dataset = pandas.DataFrame(status_binary, risk_score)\n# dataset = dataset.drop_duplicates()\n\n# Paste or type your script code here:\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = dataset.copy()\ny_true = df[''status_binary'']\ny_pred = (df[''risk_score''] > 0.35).astype(int)\n\nmetrics = {\n    ''Accuracy'': accuracy_score(y_true, y_pred),\n    ''Precision'': precision_score(y_true, y_pred),\n    ''Recall'': recall_score(y_true, y_pred),\n    ''AUC'': roc_auc_score(y_true, df[''risk_score''])\n}\n\n# Plot\nplt.figure(figsize=(6, 4))\nplt.bar(metrics.keys(), metrics.values(), color=''steelblue'')\nplt.title(''Model Performance Metrics'')\nplt.ylim(0, 1)\nplt.tight_layout()\nplt.show()  # ✅ This line is essential'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Python'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

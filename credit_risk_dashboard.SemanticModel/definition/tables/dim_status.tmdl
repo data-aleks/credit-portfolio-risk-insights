@@ -22,6 +22,13 @@ table dim_status
 
 		annotation SummarizationSetBy = Automatic
 
+	column status_binary = IF(dim_status[status] = "Default", 1,0)
+		formatString: 0
+		lineageTag: 8b7f3f20-3d6f-486d-85c0-eb79b578c550
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_status = m
 		mode: import
 		source =

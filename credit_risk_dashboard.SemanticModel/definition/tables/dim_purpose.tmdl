@@ -44,9 +44,11 @@ table dim_purpose
 				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
 				    #"Added Index1" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 0, 1, Int64.Type),
 				    #"Reordered Columns1" = Table.ReorderColumns(#"Added Index1",{"Index", "purpose"}),
-				    #"Renamed Columns2" = Table.RenameColumns(#"Reordered Columns1",{{"Index", "purpose_key"}})
+				    #"Renamed Columns2" = Table.RenameColumns(#"Reordered Columns1",{{"Index", "purpose_key"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns2","Homeimprovement","Home Improvements",Replacer.ReplaceText,{"purpose"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Debtconsolidation","Debt Consolidation",Replacer.ReplaceText,{"purpose"})
 				in
-				    #"Renamed Columns2"
+				    #"Replaced Value1"
 
 	annotation PBI_NavigationStepName = Navigation
 

@@ -75,6 +75,44 @@ table fact_records
 		displayFolder: [Age 30 - 100]
 		lineageTag: 723d609b-c8f1-4dbd-a7c6-8f3852fcf9d4
 
+	measure 'Active Accounts' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_status, dim_status[status] = "Active"))
+		formatString: 0
+		lineageTag: e195105c-e66b-4e8f-b2b8-dcb4e1ff9e67
+
+	measure 'All accounts' = ```
+			DISTINCTCOUNT(fact_records[record_id]) 
+			```
+		formatString: 0
+		lineageTag: 96b02329-5882-41da-a02b-40f6e3a9efed
+
+	measure 'Default Accounts' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_status, dim_status[status] = "Default"))
+		formatString: 0
+		lineageTag: d5c67d8b-f620-42c8-af25-ee26523ed2b4
+
+	measure 'Overall Default Rate' = fact_records[Default Accounts] / fact_records[All accounts]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f4352f67-55b5-4405-8191-f26f6fc14db8
+
+	measure 'Active Over 30 Accounts' = ```
+			CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_status, dim_status[status] = "Active"), FILTER(dim_client, dim_client[age] > 30 && dim_client[age] <= 65)) 
+			```
+		formatString: 0
+		displayFolder: [Age 30 - 100]
+		lineageTag: 90de3c48-dac4-4a63-986c-568312df6e94
+
+	measure 'Active Accounts < 30' = ```
+			CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_status, dim_status[status] = "Active"), FILTER(dim_client, dim_client[age] <= 30)) 
+			```
+		formatString: 0
+		displayFolder: [Age Below 30]
+		lineageTag: c9c09d70-4e12-4240-a4b0-403af801a5eb
+
+	measure 'Percent of all active accounts' = ```
+			[Active Accounts < 30]/[Active Accounts] 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a70c1d74-fc2f-4db4-bacc-b3fb3e3ed9d8
+
 	column record_id
 		dataType: int64
 		formatString: 0
@@ -103,6 +141,8 @@ table fact_records
 		sourceColumn: interest_rate
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"fact_records","TableItemName":"interest_rate (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
 
 	column client_key
 		dataType: int64
@@ -152,6 +192,128 @@ table fact_records
 
 		annotation SummarizationSetBy = Automatic
 
+	column loan_to_income
+		dataType: double
+		lineageTag: f689e3d7-16d4-44bf-9cc9-1ce19e5d558b
+		summarizeBy: sum
+		sourceColumn: loan_to_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"fact_records","TableItemName":"loan_to_income (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column residential_status_key
+		dataType: int64
+		formatString: 0
+		lineageTag: ed1d060f-7079-4493-bbee-05d9fa35677f
+		summarizeBy: sum
+		sourceColumn: residential_status_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'loan_to_income (bins)' =
+			IF(
+				ISBLANK('fact_records'[loan_to_income]),
+				BLANK(),
+				IF(
+					'fact_records'[loan_to_income] >= 0,
+					ROUNDDOWN('fact_records'[loan_to_income] / 0.05, 0) * 0.05,
+					ROUNDUP('fact_records'[loan_to_income] / 0.05, 0) * 0.05
+				)
+			)
+		lineageTag: 985a94f7-aa45-44aa-ac15-04fd5fb1aeae
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "fact_records"
+				          }
+				        },
+				        "Property": "loan_to_income"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 0.05,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"f","Entity":"fact_records"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"loan_to_income"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"loan_to_income"}},"Size":0.05}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'interest_rate (bins)' =
+			IF(
+				ISBLANK('fact_records'[interest_rate]),
+				BLANK(),
+				IF(
+					'fact_records'[interest_rate] >= 0,
+					ROUNDDOWN('fact_records'[interest_rate] / 0.01, 0) * 0.01,
+					ROUNDUP('fact_records'[interest_rate] / 0.01, 0) * 0.01
+				)
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4ed1203e-1324-4f21-b459-75bf14f1983b
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "fact_records"
+				          }
+				        },
+				        "Property": "interest_rate"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 0.01,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"f","Entity":"fact_records"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"interest_rate"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"interest_rate"}},"Size":0.01}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_score
+		dataType: double
+		lineageTag: 0db5735a-25a1-42aa-b2fe-896b8eb4446b
+		summarizeBy: sum
+		sourceColumn: risk_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column risk_level
+		dataType: string
+		lineageTag: bc10ae6f-b520-491b-b988-918aa526e939
+		summarizeBy: none
+		sourceColumn: risk_level
+
+		annotation SummarizationSetBy = Automatic
+
 	partition fact_records = m
 		mode: import
 		source =
@@ -174,18 +336,21 @@ table fact_records
 				    #"Merged Queries1" = Table.NestedJoin(#"Merged Queries", {"record_id"}, dim_client, {"client_key"}, "dim_client", JoinKind.LeftOuter),
 				    #"Merged Queries2" = Table.NestedJoin(#"Merged Queries1", {"grade"}, dim_grade, {"grade"}, "dim_grade", JoinKind.LeftOuter),
 				    #"Merged Queries3" = Table.NestedJoin(#"Merged Queries2", {"purpose"}, dim_purpose, {"purpose"}, "dim_purpose", JoinKind.LeftOuter),
-				    #"Removed Columns2" = Table.RemoveColumns(#"Merged Queries3",{"credit_history_length", "historic_defaults", "loan_to_income", "grade", "purpose", "employment_length", "residential_status", "income", "age"}),
-				    #"Expanded dim_residential_status" = Table.ExpandTableColumn(#"Removed Columns2", "dim_residential_status", {"residential_status_key"}, {"residential_status_key"}),
+				    #"Expanded dim_residential_status" = Table.ExpandTableColumn(#"Merged Queries3", "dim_residential_status", {"residential_status_key"}, {"residential_status_key"}),
 				    #"Expanded dim_client" = Table.ExpandTableColumn(#"Expanded dim_residential_status", "dim_client", {"client_key"}, {"client_key"}),
 				    #"Expanded dim_grade" = Table.ExpandTableColumn(#"Expanded dim_client", "dim_grade", {"grade_key"}, {"grade_key"}),
-				    #"Expanded dim_purpose" = Table.ExpandTableColumn(#"Expanded dim_grade", "dim_purpose", {"purpose_key"}, {"purpose_key"}),
-				    #"Reordered Columns1" = Table.ReorderColumns(#"Expanded dim_purpose",{"record_id", "amount", "interest_rate", "status", "residential_status_key", "client_key", "grade_key", "purpose_key"}),
-				    #"Removed Columns3" = Table.RemoveColumns(#"Reordered Columns1",{"residential_status_key"}),
-				    #"Merged Queries4" = Table.NestedJoin(#"Removed Columns3", {"status"}, dim_status, {"status"}, "dim_status", JoinKind.LeftOuter),
-				    #"Expanded dim_status" = Table.ExpandTableColumn(#"Merged Queries4", "dim_status", {"status_key"}, {"status_key"}),
-				    #"Removed Columns4" = Table.RemoveColumns(#"Expanded dim_status",{"status"})
+				    #"Replaced Value" = Table.ReplaceValue(#"Expanded dim_grade","Homeimprovement","Home Improvements",Replacer.ReplaceText,{"purpose"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Debtconsolidation","Debt Consolidation",Replacer.ReplaceText,{"purpose"}),
+				    #"Merged Queries4" = Table.NestedJoin(#"Replaced Value1", {"purpose"}, dim_purpose, {"purpose"}, "dim_purpose.1", JoinKind.LeftOuter),
+				    #"Expanded dim_purpose.1" = Table.ExpandTableColumn(#"Merged Queries4", "dim_purpose.1", {"purpose_key"}, {"purpose_key"}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Expanded dim_purpose.1",{"dim_purpose"}),
+				    #"Merged Queries5" = Table.NestedJoin(#"Removed Columns2", {"status"}, dim_status, {"status"}, "dim_status", JoinKind.LeftOuter),
+				    #"Expanded dim_status" = Table.ExpandTableColumn(#"Merged Queries5", "dim_status", {"status_key"}, {"status_key"}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Expanded dim_status",{"status", "historic_defaults", "credit_history_length", "residential_status", "grade", "purpose", "income", "age", "employment_length"}),
+				    #"Merged Queries6" = Table.NestedJoin(#"Removed Columns3", {"record_id"}, #"credit_risk_data credit_risk_dataset", {"record_id"}, "credit_risk_data credit_risk_dataset", JoinKind.LeftOuter),
+				    #"Expanded credit_risk_data credit_risk_dataset" = Table.ExpandTableColumn(#"Merged Queries6", "credit_risk_data credit_risk_dataset", {"risk_score", "risk_level"}, {"risk_score", "risk_level"})
 				in
-				    #"Removed Columns4"
+				    #"Expanded credit_risk_data credit_risk_dataset"
 
 	annotation PBI_NavigationStepName = Navigation
 

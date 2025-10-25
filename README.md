@@ -34,6 +34,25 @@ This dataset simulates credit reference agency data and was sourced from [Kaggle
 | cb_preson_cred_hist_length  | Credit history length                |
 
 ## Key Insights From Data
+### Which age brackets have the highest number of defaulted accounts?
+Identify borrower age groups with elevated default rates to refine targeting and approval criteria.
+
+### Can employment length act as a risk indicator?
+Explore how job stability influences creditworthiness and default behavior
+
+### How does historical default behavior affect current risk?
+Evaluate whether borrowers with prior defaults are more likely to default again, informing approval policies and risk scoring models.
+
+### Can we use loan to income ration to identify high risk accounts?
+Assess whether borrowers with higher loan-to-income ratios are more likely to default, guiding affordability thresholds
+
+### Which loan intents are most associated with default?
+Analyze default rates across loan purposes (e.g., education, medical, home improvement) to identify high-risk categories and adjust product offerings
+
+### Do high interest rates affect default rates?
+Investigate whether borrowers with higher interest rates are more likely to default, helping assess the risk-return balance and inform pricing strategies.
+
+### What is the business impact?
+Quantify the business cost of defaults across high-risk demographics to support strategic lending decisions.
 
 ## Business Recommendation
-

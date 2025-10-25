@@ -1,0 +1,53 @@
+table feature_importance
+	lineageTag: cd56aa6f-90c5-4ae5-badd-347620c459cc
+
+	column Feature
+		dataType: string
+		lineageTag: 4359b57d-a17c-46df-8d14-44ba38e5754b
+		summarizeBy: none
+		sourceColumn: Feature
+
+		annotation SummarizationSetBy = Automatic
+
+	column Coefficient
+		dataType: double
+		lineageTag: aa4a2aee-f3ac-44ef-a1af-55e542b96521
+		summarizeBy: sum
+		sourceColumn: Coefficient
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition feature_importance = m
+		mode: import
+		queryGroup: 'Stat Model'
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "credit_risk_data", [ReturnSingleDatabase=true]),
+				    credit_risk_data_credit_risk_dataset = Source{[Schema="credit_risk_data",Item="credit_risk_dataset"]}[Data],
+				    #"Added Index" = Table.AddIndexColumn(credit_risk_data_credit_risk_dataset, "Index", 0, 1, Int64.Type),
+				    #"Renamed Columns [index]" = Table.RenameColumns(#"Added Index",{{"Index", "record_id"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns [index]",{"record_id", "person_age", "person_income", "person_home_ownership", "person_emp_length", "loan_intent", "loan_grade", "loan_amnt", "loan_int_rate", "loan_status", "loan_percent_income", "cb_person_default_on_file", "cb_person_cred_hist_length"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"loan_intent", "purpose"}, {"loan_amnt", "amount"}, {"loan_int_rate", "interest_rate"}, {"loan_percent_income", "loan_to_income"}, {"cb_person_default_on_file", "historic_defaults"}, {"cb_person_cred_hist_length", "credit_history_length"}, {"loan_grade", "grade"}, {"person_emp_length", "employment_length"}, {"person_home_ownership", "residential_status"}, {"person_income", "income"}, {"person_age", "age"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"loan_to_income", Percentage.Type}, {"amount", Currency.Type}, {"income", Currency.Type}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Changed Type", "status", each if [loan_status] = 1 then "Default" else if [loan_status] = 0 then "Active" else null),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"loan_status"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Columns", "interest_rate_n", each [interest_rate] / 100),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"interest_rate"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"interest_rate_n", "interest_rate"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"interest_rate", Percentage.Type}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Changed Type1",{{"purpose", Text.Proper, type text}, {"residential_status", Text.Proper, type text}}),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Capitalized Each Word", "historic_defaults_binary", each if [historic_defaults] = "Y" then 1 else 0),
+				    #"Added Conditional Column2" = Table.AddColumn(#"Added Conditional Column1", "status_binary", each if [status] = "Default" then 1 else 0),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Conditional Column2",{{"income", type number}, {"amount", type number}}),
+				    #"Run Python script" = Python.Execute("# 'dataset' holds the input data for this script#(lf)#(lf)import pandas as pd#(lf)from sklearn.linear_model import LogisticRegression#(lf)#(lf)# Copy the input dataset#(lf)df = dataset.copy()#(lf)#(lf)# Define predictors and target#(lf)X = df[['interest_rate', 'employment_length', 'purpose', 'historic_defaults_binary',#(lf)        'age', 'loan_to_income', 'residential_status']]#(lf)y = df['status_binary']  # Binary target: 0 = no default, 1 = default#(lf)#(lf)# Encode categorical variables#(lf)X = pd.get_dummies(X, columns=['purpose', 'residential_status'], drop_first=True)#(lf)#(lf)# Train logistic regression model#(lf)model = LogisticRegression(max_iter=1000)#(lf)model.fit(X, y)#(lf)#(lf)# Predict risk score (probability of default)#(lf)df['risk_score'] = model.predict_proba(X)[:, 1]#(lf)#(lf)# Apply custom threshold to classify predicted defaults#(lf)threshold = 0.35  # Adjust this value to tune recall vs precision#(lf)df['predicted_default'] = (df['risk_score'] > threshold).astype(int)#(lf)#(lf)# Extract feature importance (coefficients)#(lf)importance = pd.DataFrame({#(lf)    'Feature': X.columns,#(lf)    'Coefficient': model.coef_[0]#(lf)}).sort_values(by='Coefficient', ascending=False)#(lf)#(lf)# Output the importance table#(lf)dataset = importance",[dataset=#"Changed Type2"]),
+				    importance = #"Run Python script"{[Name="importance"]}[Value],
+				    #"Changed Type3" = Table.TransformColumnTypes(importance,{{"Feature", type text}, {"Coefficient", type number}})
+				in
+				    #"Changed Type3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

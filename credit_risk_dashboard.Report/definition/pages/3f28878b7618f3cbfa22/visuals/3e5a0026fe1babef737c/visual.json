@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "3e5a0026fe1babef737c",
+  "position": {
+    "x": 23.333333333333332,
+    "y": 0,
+    "z": 0,
+    "height": 360,
+    "width": 286.66666666666669
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "feature_importance"
+                    }
+                  },
+                  "Property": "Feature"
+                }
+              },
+              "queryRef": "feature_importance.Feature",
+              "nativeQueryRef": "Feature",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "feature_importance"
+                        }
+                      },
+                      "Property": "Coefficient"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(feature_importance.Coefficient)",
+              "nativeQueryRef": "Coefficient",
+              "displayName": "Coefficient"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "feature_importance"
+                      }
+                    },
+                    "Property": "Coefficient"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

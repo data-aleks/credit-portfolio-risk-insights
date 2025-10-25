@@ -3,6 +3,7 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: en-GB
 	dataAccessOptions
+		fastCombine
 		legacyRedirects
 		returnErrorValuesAsNull
 
@@ -11,11 +12,16 @@ queryGroup Original
 
 	annotation PBI_QueryGroupOrder = 0
 
+/// Queries relating to statistical model used in this project.
+queryGroup 'Stat Model'
+
+	annotation PBI_QueryGroupOrder = 1
+
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["credit_risk_data credit_risk_dataset","fact_records","dim_client","dim_residential_status","dim_purpose","dim_grade","dim_status"]
+annotation PBI_QueryOrder = ["credit_risk_data credit_risk_dataset","fact_records","dim_client","feature_importance","dim_residential_status","dim_purpose","dim_grade","dim_status"]
 
 ref table fact_records
 ref table dim_client
@@ -23,6 +29,7 @@ ref table dim_residential_status
 ref table dim_purpose
 ref table dim_grade
 ref table dim_status
+ref table feature_importance
 
 ref cultureInfo en-GB
 
