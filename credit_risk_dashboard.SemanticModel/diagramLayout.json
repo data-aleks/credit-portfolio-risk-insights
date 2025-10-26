@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 537.14285714285722,
-        "y": 128.57142857142858
+        "x": 762.85714285714289,
+        "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 387.35267048511042,
-            "y": 342.34126984126982
+            "x": 414.49552762796759,
+            "y": 0
           },
           "nodeIndex": "dim_client",
           "nodeLineageTag": "799d1fc9-56f3-445d-bb07-b0ea005863e2",
@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 1207.6691427749934,
-            "y": 180.35714285714283
+            "x": 1059.0977142035647,
+            "y": 0
           },
           "nodeIndex": "dim_grade",
           "nodeLineageTag": "68aa8981-4ebb-427d-a68e-ba4a85df96ff",
@@ -36,8 +36,8 @@
         },
         {
           "location": {
-            "x": 1201.7615863230205,
-            "y": 933.452380952381
+            "x": 1331.7615863230205,
+            "y": 0
           },
           "nodeIndex": "dim_purpose",
           "nodeLineageTag": "d02b288b-3c34-4ebc-9387-323170af847f",
@@ -49,8 +49,8 @@
         },
         {
           "location": {
-            "x": 0,
-            "y": 539.00793650793651
+            "x": 68.571428571428584,
+            "y": 0
           },
           "nodeIndex": "dim_residential_status",
           "nodeLineageTag": "bfdcee84-d8ab-4243-82b0-f3ffbb452938",
@@ -75,8 +75,8 @@
         },
         {
           "location": {
-            "x": 1196.7139672754015,
-            "y": 509.71433703831457
+            "x": 788.142538703973,
+            "y": 0
           },
           "nodeIndex": "dim_status",
           "nodeLineageTag": "c0cbfb2c-d5a8-4414-91fd-0048665d3a5f",
@@ -88,13 +88,26 @@
         },
         {
           "location": {
-            "x": 1630.240571346422,
-            "y": 436.66666666666663
+            "x": 1594.5262856321363,
+            "y": 0
           },
           "nodeIndex": "feature_importance",
           "nodeLineageTag": "cd56aa6f-90c5-4ae5-badd-347620c459cc",
           "size": {
             "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1855.6691427749936,
+            "y": 0
+          },
+          "nodeIndex": "Risk Threshold",
+          "nodeLineageTag": "b5cd13b4-4771-4ad7-ab5a-b02100d69d35",
+          "size": {
+            "height": 224,
             "width": 234
           },
           "zIndex": 0

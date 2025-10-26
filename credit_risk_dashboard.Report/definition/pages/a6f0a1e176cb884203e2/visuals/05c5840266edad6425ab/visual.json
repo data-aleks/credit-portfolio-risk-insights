@@ -6,8 +6,7 @@
     "y": 304.28571428571428,
     "z": 7000,
     "height": 340,
-    "width": 602.85714285714289,
-    "tabOrder": 1000
+    "width": 602.85714285714289
   },
   "visual": {
     "visualType": "columnChart",

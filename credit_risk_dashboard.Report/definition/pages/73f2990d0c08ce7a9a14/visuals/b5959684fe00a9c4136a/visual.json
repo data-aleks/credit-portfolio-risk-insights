@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
-  "name": "260c70a11c32998299f6",
+  "name": "b5959684fe00a9c4136a",
   "position": {
-    "x": 531.69230769230762,
+    "x": 7.5524475524475516,
     "y": 16.615384615384613,
-    "z": 9500,
+    "z": 9000,
     "height": 154.06993006993005,
     "width": 513.56643356643349,
-    "tabOrder": 3000
+    "tabOrder": 3001
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,11 @@
                       "Entity": "fact_records"
                     }
                   },
-                  "Property": "Default Loss"
+                  "Property": "Active Accounts < 30"
                 }
               },
-              "queryRef": "fact_records.Default Loss",
-              "nativeQueryRef": "Default Loss"
+              "queryRef": "fact_records.Active Accounts < 30",
+              "nativeQueryRef": "Active Accounts < 30"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "fact_records"
                   }
                 },
-                "Property": "Default Loss"
+                "Property": "Active Accounts < 30"
               }
             },
             "direction": "Descending"
@@ -50,24 +50,6 @@
         ],
         "isDefaultSort": true
       }
-    },
-    "objects": {
-      "value": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "fact_records.Default Loss"
-          }
-        }
-      ]
     },
     "drillFilterOtherVisuals": true
   }

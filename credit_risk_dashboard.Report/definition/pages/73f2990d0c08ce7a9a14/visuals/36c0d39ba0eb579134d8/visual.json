@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "36c0d39ba0eb579134d8",
   "position": {
-    "x": 11.224489795918089,
-    "y": 76.122448979591823,
-    "z": 1500,
+    "x": 14.404761904761548,
+    "y": 74.122448979591823,
+    "z": 1000,
     "height": 194.28571428571431,
-    "width": 378.57142857142861,
-    "tabOrder": 1000
+    "width": 485.83333333333343
   },
   "visual": {
     "visualType": "scatterChart",
@@ -67,6 +66,54 @@
               "expr": {
                 "Literal": {
                   "Value": "'Trend line 1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.23D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

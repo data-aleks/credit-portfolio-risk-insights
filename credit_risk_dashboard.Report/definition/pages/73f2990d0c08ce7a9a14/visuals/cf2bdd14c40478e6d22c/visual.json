@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
-  "name": "04c775b754f3a0f6c586",
+  "name": "cf2bdd14c40478e6d22c",
   "position": {
-    "x": 12.833333333333334,
-    "y": 10.666666666666666,
+    "x": 10.266666666666667,
+    "y": 8,
     "z": 2000,
-    "height": 69.333333333333329,
-    "width": 486.81111111111113
+    "height": 72,
+    "width": 492.80000000000007
   },
   "visual": {
     "visualType": "textbox",
@@ -18,7 +18,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Can we use loan to income ration to identify high risk accounts?",
+                    "value": "Currently at risk customers based on statistical regression model. ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "Segoe UI Semibold",
@@ -35,5 +35,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "dccb913c3b3f3f4befc5"
+  "parentGroupName": "98bfa59228ed752bf151"
 }

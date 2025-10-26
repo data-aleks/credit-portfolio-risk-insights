@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "933271d11b34daf627fe",
+  "position": {
+    "x": 8.8888888888887632,
+    "y": 781.66666666666674,
+    "z": 5000,
+    "height": 288.33333333333337,
+    "width": 320
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_records"
+                    }
+                  },
+                  "Property": "high_risk_count [dynamic]"
+                }
+              },
+              "queryRef": "fact_records.high_risk_count",
+              "nativeQueryRef": "high_risk_count [dynamic]"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_records"
+                    }
+                  },
+                  "Property": "low_risk_count [dynamic]"
+                }
+              },
+              "queryRef": "fact_records.low_risk_count",
+              "nativeQueryRef": "low_risk_count [dynamic]"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_records"
+                    }
+                  },
+                  "Property": "medium_risk_count [dynamic]"
+                }
+              },
+              "queryRef": "fact_records.medium_risk_count",
+              "nativeQueryRef": "medium_risk_count [dynamic]"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_records"
+                  }
+                },
+                "Property": "high_risk_count [dynamic]"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "df7deb5a7797006771ea"
+}

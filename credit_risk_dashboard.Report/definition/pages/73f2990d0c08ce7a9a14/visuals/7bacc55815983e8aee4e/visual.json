@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "7bacc55815983e8aee4e",
   "position": {
-    "x": 906.92307692307691,
-    "y": 453.07692307692304,
-    "z": 11000,
-    "height": 288.46153846153845,
-    "width": 399.23076923076923,
-    "tabOrder": 10000
+    "x": 16.84375,
+    "y": 79.6875,
+    "z": 1000,
+    "height": 187.5,
+    "width": 478.04166666666669
   },
   "visual": {
     "visualType": "columnChart",
@@ -23,11 +22,11 @@
                       "Entity": "fact_records"
                     }
                   },
-                  "Property": "risk_level"
+                  "Property": "risk_level_static"
                 }
               },
-              "queryRef": "fact_records.risk_level",
-              "nativeQueryRef": "risk_level",
+              "queryRef": "fact_records.risk_level_static",
+              "nativeQueryRef": "risk_level_static",
               "active": true
             }
           ]
@@ -70,6 +69,50 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "parentGroupName": "98bfa59228ed752bf151"
 }

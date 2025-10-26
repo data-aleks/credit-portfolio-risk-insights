@@ -113,6 +113,107 @@ table fact_records
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: a70c1d74-fc2f-4db4-bacc-b3fb3e3ed9d8
 
+	measure 'risk_level_classification [dynamic]' =
+			
+			SWITCH(
+			    TRUE(),
+			    MAX([risk_score]) <= [Risk Threshold Value], "Low",
+			    MAX([risk_score]) <= [Risk Threshold Value] + 0.2, "Medium",
+			    MAX([risk_score]) > [Risk Threshold Value] + 0.2, "High",
+			    BLANK()
+			)
+		displayFolder: [Classification Dynamic]
+		lineageTag: 0045bf2a-cc61-409d-8bdb-88e6c2e4d5c2
+
+	measure 'low_risk_count [dynamic]' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_records),
+			    FILTER(fact_records, [risk_score] <= [Risk Threshold Value]),
+			    FILTER(dim_status, dim_status[status] = "Active"),
+			    FILTER(dim_client, dim_client[age] <= 30)
+			)
+		formatString: 0
+		displayFolder: [Classification Dynamic]
+		lineageTag: 8f6ea65a-7e14-46ad-b6d1-6cf872adc97c
+
+	measure 'medium_risk_count [dynamic]' = ```
+			
+			CALCULATE(
+			    COUNTROWS(fact_records),
+			    FILTER(fact_records, 
+			        [risk_score] > [Risk Threshold Value] &&
+			        [risk_score] <= [Risk Threshold Value] + 0.3
+			    ),
+			    FILTER(dim_status, dim_status[status] = "Active"),
+			    FILTER(dim_client, dim_client[age] <= 30)
+			)
+			```
+		formatString: 0
+		displayFolder: [Classification Dynamic]
+		lineageTag: f63dbcd6-94bd-4830-b38e-e36644a592bb
+
+	measure 'high_risk_count [dynamic]' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_records),
+			    FILTER(fact_records, [risk_score] > [Risk Threshold Value] + 0.3),
+			    FILTER(dim_status, dim_status[status] = "Active"),
+			    FILTER(dim_client, dim_client[age] <= 30)
+			)
+		formatString: 0
+		displayFolder: [Classification Dynamic]
+		lineageTag: a367122c-a2b6-430a-a728-784d926a12df
+
+	measure 'High Risk Accounts' = ```
+			CALCULATE(
+			    DISTINCTCOUNT(fact_records[record_id]), 
+			    FILTER(dim_status, dim_status[status] = "Active"), 
+			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(fact_records, fact_records[risk_level_static] = "High")
+			)
+			```
+		formatString: 0
+		displayFolder: [Classification Static]
+		lineageTag: e6a87b07-521d-4cf0-b96c-fcc673dea6a1
+
+	measure 'Medium Risk Accounts' = ```
+			CALCULATE(
+			    DISTINCTCOUNT(fact_records[record_id]), 
+			    FILTER(dim_status, dim_status[status] = "Active"), 
+			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(fact_records, fact_records[risk_level_static] = "Medium")
+			)
+			```
+		formatString: 0
+		displayFolder: [Classification Static]
+		lineageTag: 18166434-e42a-4ad3-b93e-28caf69269be
+
+	measure 'Low Risk Accounts' = ```
+			CALCULATE(
+			    DISTINCTCOUNT(fact_records[record_id]), 
+			    FILTER(dim_status, dim_status[status] = "Active"), 
+			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(fact_records, fact_records[risk_level_static] = "Low")
+			)
+			```
+		formatString: 0
+		displayFolder: [Classification Static]
+		lineageTag: 5333eb7e-b880-46dc-a980-841c13c0af66
+
+	measure 'Static vs Dynamic Classification Change' =
+			IF(
+			    [High Risk Accounts] <> [high_risk_count [dynamic]]],
+			    DIVIDE(
+			        [high_risk_count [dynamic]]] - [High Risk Accounts],
+			        [High Risk Accounts]
+			    ),
+			    BLANK()
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: [Classification Comparison]
+		lineageTag: 79141b81-3f28-4337-9ceb-be7977a9f4e9
+
 	column record_id
 		dataType: int64
 		formatString: 0
@@ -298,6 +399,7 @@ table fact_records
 
 	column risk_score
 		dataType: double
+		displayFolder: [Classification Dynamic]
 		lineageTag: 0db5735a-25a1-42aa-b2fe-896b8eb4446b
 		summarizeBy: sum
 		sourceColumn: risk_score
@@ -306,11 +408,17 @@ table fact_records
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column risk_level
-		dataType: string
-		lineageTag: bc10ae6f-b520-491b-b988-918aa526e939
+	column risk_level_static =
+			
+			SWITCH(
+			    TRUE(),
+			    [risk_score] <= 0.3, "Low",
+			    [risk_score] <= 0.6, "Medium",
+			    [risk_score] > 0.6, "High",
+			    BLANK()
+			)
+		lineageTag: 48367577-b184-400a-b338-c24621d253df
 		summarizeBy: none
-		sourceColumn: risk_level
 
 		annotation SummarizationSetBy = Automatic
 
@@ -348,9 +456,10 @@ table fact_records
 				    #"Expanded dim_status" = Table.ExpandTableColumn(#"Merged Queries5", "dim_status", {"status_key"}, {"status_key"}),
 				    #"Removed Columns3" = Table.RemoveColumns(#"Expanded dim_status",{"status", "historic_defaults", "credit_history_length", "residential_status", "grade", "purpose", "income", "age", "employment_length"}),
 				    #"Merged Queries6" = Table.NestedJoin(#"Removed Columns3", {"record_id"}, #"credit_risk_data credit_risk_dataset", {"record_id"}, "credit_risk_data credit_risk_dataset", JoinKind.LeftOuter),
-				    #"Expanded credit_risk_data credit_risk_dataset" = Table.ExpandTableColumn(#"Merged Queries6", "credit_risk_data credit_risk_dataset", {"risk_score", "risk_level"}, {"risk_score", "risk_level"})
+				    #"Expanded credit_risk_data credit_risk_dataset" = Table.ExpandTableColumn(#"Merged Queries6", "credit_risk_data credit_risk_dataset", {"risk_score"}, {"risk_score"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Expanded credit_risk_data credit_risk_dataset",{{"risk_score", type number}})
 				in
-				    #"Expanded credit_risk_data credit_risk_dataset"
+				    #"Changed Type2"
 
 	annotation PBI_NavigationStepName = Navigation
 
