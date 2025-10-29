@@ -7,13 +7,13 @@ table fact_records
 			    DISTINCTCOUNT(fact_records[record_id]),
 			    FILTER(dim_status, dim_status[status] = "Default"),
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17)
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			)
 		formatString: 0
 		displayFolder: [Age Below 30]
 		lineageTag: f83eb75c-cff4-4701-a10a-ab7b27dcc9d2
 
-	measure 'Total Records' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_client, dim_client[age] <= 30))
+	measure 'Total Records' = CALCULATE(DISTINCTCOUNT(fact_records[record_id]), FILTER(dim_client, dim_client[age] <= 30), FILTER(dim_client, dim_client[employment_length] < 11))
 		formatString: 0
 		displayFolder: [Age Below 30]
 		lineageTag: 0caec8ef-cac7-47c1-979b-53b1086f328d
@@ -28,7 +28,7 @@ table fact_records
 			    SUM(fact_records[amount]), 
 			    FILTER(dim_status, dim_status[status] = "Default"), 
 			    FILTER(dim_client, dim_client[age] <= 30) ,
-			    FILTER(dim_client, dim_client[employment_length] < 17)    
+			    FILTER(dim_client, dim_client[employment_length] < 11)    
 			)
 			```
 		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
@@ -42,7 +42,7 @@ table fact_records
 			    SUM(fact_records[amount]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17)
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			) 
 			```
 		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
@@ -118,7 +118,7 @@ table fact_records
 			    DISTINCTCOUNT(fact_records[record_id]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17)
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			) 
 			```
 		formatString: 0
@@ -150,7 +150,7 @@ table fact_records
 			    FILTER(fact_records, [risk_score] <= [Risk Threshold Value]),
 			    FILTER(dim_status, dim_status[status] = "Active"),
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17)
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			)
 		formatString: 0
 		displayFolder: [Classification Dynamic]
@@ -165,7 +165,8 @@ table fact_records
 			        [risk_score] <= [Risk Threshold Value] + 0.25
 			    ),
 			    FILTER(dim_status, dim_status[status] = "Active"),
-			    FILTER(dim_client, dim_client[age] <= 30)
+			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			)
 			```
 		formatString: 0
@@ -179,7 +180,7 @@ table fact_records
 			    FILTER(fact_records, [risk_score] > [Risk Threshold Value] + 0.25),
 			    FILTER(dim_status, dim_status[status] = "Active"),
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17)
+			    FILTER(dim_client, dim_client[employment_length] < 11)
 			)
 		formatString: 0
 		displayFolder: [Classification Dynamic]
@@ -190,7 +191,7 @@ table fact_records
 			    DISTINCTCOUNT(fact_records[record_id]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17),
+			    FILTER(dim_client, dim_client[employment_length] < 11),
 			    FILTER(fact_records, fact_records[risk_level_static] = "High")
 			)
 			```
@@ -203,7 +204,7 @@ table fact_records
 			    DISTINCTCOUNT(fact_records[record_id]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17),    
+			    FILTER(dim_client, dim_client[employment_length] < 11),    
 			    FILTER(fact_records, fact_records[risk_level_static] = "Medium")
 			)
 			```
@@ -216,7 +217,7 @@ table fact_records
 			    DISTINCTCOUNT(fact_records[record_id]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
 			    FILTER(dim_client, dim_client[age] <= 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17),
+			    FILTER(dim_client, dim_client[employment_length] < 11),
 			    FILTER(fact_records, fact_records[risk_level_static] = "Low")
 			)
 			```
@@ -250,7 +251,7 @@ table fact_records
 			     SUM(fact_records[amount]),
 			     FILTER(dim_status, dim_status[status] = "Active"), 
 			     FILTER(dim_client, dim_client[age] < 30),
-			     FILTER(dim_client, dim_client[employment_length] < 17),
+			     FILTER(dim_client, dim_client[employment_length] < 11),
 			     FILTER(fact_records, fact_records[risk_level_static] = "High")
 			)
 			```
@@ -264,7 +265,7 @@ table fact_records
 			CALCULATE(
 			    SUM(fact_records[amount]),
 			    FILTER(dim_client, dim_client[age] < 30),
-			    FILTER(dim_client, dim_client[employment_length] < 17),
+			    FILTER(dim_client, dim_client[employment_length] < 11),
 			    FILTER(dim_status, dim_status[status] = "Active"),
 			    FILTER(fact_records, [risk_score] > [Risk Threshold Value] + 0.25)
 			)
