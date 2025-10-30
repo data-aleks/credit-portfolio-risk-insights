@@ -43,50 +43,51 @@ We are utilising a star schema data model for the purposes of this project.
 ### Which age brackets have the highest number of defaulted accounts?
 Identify borrower age groups with elevated default rates to refine targeting and approval criteria.
 
-![Default rates by age brackets](./images/screenshots/age_brackets.png "Default rates by age brackets")
+![Default rates by age brackets](./images/visualisations/default_rate_by_age_brackets.png "Default rates by age brackets")
 
 Based on data we can establish that there is an increased number of defaults for ages between 22 and 24 years old for young people ( people aged below 30 years old ). This indicates that lending to people in this age bracket carries increased risk of default.
 
 ### Can employment length act as a risk indicator?
 Explore how job stability influences creditworthiness and default behavior.
 
-<!-- ![Employment length as risk indicator](./images/screenshots/employment_length.png "Employment lengths as risk indicator") --> 
+![Employment length as risk indicator](./images/visualisations/default_rate_vs_employent_length.png "Employment lengths as risk indicator") 
 
 ### How does historical default behavior affect current risk?
 Evaluate whether borrowers with prior defaults are more likely to default again, informing approval policies and risk scoring models.
 
-<!-- ![Historical default behaviour](./images/screenshots/historical_defaults.png "Historical default behaviour") -->
+![Impact of historical defaults on default rate](./images/visualisations/historic_default_impact.png "Impact of historical defaults on default rate")
 
 
 ### Can we use loan to income ratio to identify high risk accounts?
 Assess whether borrowers with higher loan-to-income ratios are more likely to default, guiding affordability thresholds.
 
-<!-- ![Loan to income ratio](./images/screenshots/loan_to_income.png "Loan to income ratio") -->
+![Defaults by loan to income brackets](./images/visualisations/defaults_by_lti_brackets.png "Defaults by loan to income brackets")
 
 
 ### Which loan intents are most associated with default?
 Analyze default rates across loan purposes (e.g., education, medical, home improvement) to identify high-risk categories and adjust product offerings.
 
-<!-- ![Loan intents and default rate](./images/screenshots/loan_purpose.png "Loan intents and default rate") -->
+![Defaults by purpose](./images/visualisations/default_by_loan_purpose.png "Defaults by purpose")
 
 ### Do high interest rates affect default rates?
 Investigate whether borrowers with higher interest rates are more likely to default, helping assess the risk-return balance and inform pricing strategies.
 
-<!-- ![Effect of high interest rate rates on default rate](./images/screenshots/interest_rates.png "Effect of high interest rate rates on default rate") -->
+![Effect of high interest rate rates on default rate](./images/visualisations/default_rate_vs_interest_rate.png "Effect of high interest rate rates on default rate")
 
 ### What is the business impact?
 Quantify the business cost of defaults across high-risk demographics to support strategic lending decisions.
 
-<!-- ![Overal default loss](./images/screenshots/default_business_impact_overall.png "Overal default loss") -->
+![Active and default accounts](./images/visualisations/kpi_active_vs_default_accounts.png "Active and default accounts")
 
-<!-- ![High risk customer default loss](./images/screenshots/default_business_impact_high_risk.png "High risk customer default loss") -->
+![Potential default loss from high risk accounts](./images/visualisations/kpi_potential_default_loss.png "Potential default loss from high risk accounts")
 
+![Account classified as high risk](./images/visualisations/kpi_high_risk_accounts.png "Account classified as high risk")
 
 
 ### Predictive modeling
 In order to clasify records by risk level a regression model was implemented within power bi using python using key features like interest_rate, loan_to_income, purpose, residential_status, age, employment_length, historic_defaults_binary (binary value to indicate whether records had historic default. 0 no historic default, 1 having historic defaults). Based on this model achieved AUC score of 0.8 indicating a strong ability to distinguish between default and non default cases. 
 
-![Model Performance Overview Page](./images/screenshots/age_brackets.png "Model Perforamnce Overview Page")
+![Model Performance Overview Page](./images/screenshots/model_performance_overview.png "Model Perforamnce Overview Page")
 
 #### Python regression risk modeling code.
 ```python
@@ -131,5 +132,8 @@ dataset = df
 ```
 
 What if analysis section has been added by way of a slider allowing to adjust threshold levels for classification of records. 
+
+![What if functionality](./images/screenshots/what_if.png"What if functionality")
+
 
 ## Business Recommendation
