@@ -1,0 +1,268 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Model Performance Overview",
+  "name": "efa443675b0fdf402ffe",
+  "options": {
+    "targetVisualNames": [
+      "31b923e14625c4bba1a6"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "3f28878b7618f3cbfa22",
+    "sections": {
+      "3f28878b7618f3cbfa22": {
+        "visualContainers": {
+          "002cee46983fcd1e29eb": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "79c3ea9159128aecf60c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_status"
+                        }
+                      },
+                      "Property": "status_binary"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f12f12f23bada6cbd3b2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "risk_score"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pythonVisual",
+              "objects": {}
+            }
+          },
+          "e1a4ba8c4182b552234b": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "268bbc8fb81738520fbe": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "3e5a0026fe1babef737c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ce2a7db72ff2ff8e5a31",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "feature_importance"
+                        }
+                      },
+                      "Property": "Feature"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "342484e253fc3874dcad",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "feature_importance"
+                            }
+                          },
+                          "Property": "Coefficient"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "feature_importance"
+                            }
+                          },
+                          "Property": "Coefficient"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "feature_importance"
+                        }
+                      },
+                      "Property": "Feature"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "24e885841efdaf9771d9": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "766c4d51de7cc51759af": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d8d030b4597fbd9a89d9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d09b1300f70333384d2e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_status"
+                        }
+                      },
+                      "Property": "status_binary"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "2eec6bfde60045e0f8de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "risk_score"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pythonVisual",
+              "objects": {}
+            }
+          },
+          "b2ecc17cc14d7b7b0b88": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "1ec0e782558e3b5b646e": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "9726910610d992f3ed78": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "5bdda9e89ad8e86fa8d0": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "23066597f506a51e049f": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "968d005fc7d722178010": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "08b3ea04c8db74ad1d99": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "31b923e14625c4bba1a6": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

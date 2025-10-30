@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "968d005fc7d722178010",
+  "position": {
+    "x": 126.66666666666667,
+    "y": 139.24554183813444,
+    "z": 6000,
+    "height": 130,
+    "width": 1773.3333333333335,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "To classify customer default risk, we implemented a logistic regression model trained on key financial and demographic predictors, including interest rate, loan-to-income ratio, age, employment length, loan purpose, residential status, and historic default history. Categorical variables were encoded to ensure compatibility with the model, and a custom classification threshold of 0.35 was applied to balance precision and recall. The model outputs a risk score representing the probability of default, which is then used to flag high-risk accounts. Performance metrics accuracy, precision, recall, and AUC were calculated to evaluate the model’s effectiveness, providing a robust foundation for risk segmentation and decision-making.",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

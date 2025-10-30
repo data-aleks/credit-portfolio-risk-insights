@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "08b3ea04c8db74ad1d99",
+  "position": {
+    "x": 1438.3333333333335,
+    "y": 270,
+    "z": 7000,
+    "height": 425,
+    "width": 461.66666666666669,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "The model performance metrics accuracy, precision, recall, and AUC offer a comprehensive view of how effectively the logistic regression model identifies default risk. Accuracy reflects the overall correctness of predictions, while precision measures how many predicted defaults were actually correct, helping reduce false positives. Recall captures the model’s ability to detect actual defaults, which is critical for minimizing missed high-risk cases. The AUC (Area Under the Curve) indicates the model’s ability to distinguish between default and non-default cases across all thresholds.",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

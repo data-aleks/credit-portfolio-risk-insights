@@ -1,0 +1,133 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "31b923e14625c4bba1a6",
+  "position": {
+    "x": 126.66666666666667,
+    "y": 694.2455418381345,
+    "z": 8000,
+    "height": 295,
+    "width": 1773.3333333333335,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "The logistic regression model was calibrated using a classification threshold of ",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": "0.35",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": ", chosen to strike a balance between identifying true defaults and minimizing false alarms. At this threshold, the model achieved an ",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": "accuracy score of 0.72",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": ", meaning 72% of all predictions—both defaults and non-defaults—were correct. The ",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": "precision score of 0.60",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": " indicates that 60% of accounts flagged as high-risk were indeed true defaults, helping reduce unnecessary interventions. Meanwhile, the ",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": "recall score of 0.68",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": " shows that the model successfully identified 68% of all actual defaults, which is critical for proactive risk management. The ",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": "AUC score of 0.78",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "16pt"
+                    }
+                  },
+                  {
+                    "value": " reflects strong overall discrimination between defaulting and non-defaulting customers across all threshold levels.",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Feature importance analysis revealed that interest rate (20.52) and loan-to-income ratio (8.89) were the most influential predictors, followed by residential status, historic defaults, and loan purpose. These variables collectively drive the model’s ability to assign meaningful risk scores and classify accounts with confidence. The threshold impact chart further validates the choice of 0.35, showing it offers a best trade-off between precision and recall, making it well-suited for operational use in credit risk segmentation.",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
