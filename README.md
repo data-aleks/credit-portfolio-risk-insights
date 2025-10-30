@@ -1,5 +1,7 @@
-# Credit Risk Dashboard
+# Credit Risk And Loss Insights For Young Borrowers ( Under 30 )
 A business intelligence case study using Power BI and data analytics
+
+![Power BI Dashboard](./images/screenshots/main_dashboard.png "Credit Risk And Loss Insights For Young Borrowers ( Under 30 ) dashboard")
 
 ## Table of Contents
 - [Project Introduction](#project-introduction)
@@ -33,6 +35,10 @@ This dataset simulates credit reference agency data and was sourced from [Kaggle
 | cb_person_default_on_file   | Historical default                   |
 | cb_preson_cred_hist_length  | Credit history length                |
 
+### Data Model
+We are utilising a star schema data model for the purposes of this project. 
+![Dashboard Data Model](./images/screenshots/data_model.png "Dashboard star schema data model")
+
 ## Key Insights From Data
 ### Which age brackets have the highest number of defaulted accounts?
 Identify borrower age groups with elevated default rates to refine targeting and approval criteria.
@@ -44,51 +50,85 @@ Based on data we can establish that there is an increased number of defaults for
 ### Can employment length act as a risk indicator?
 Explore how job stability influences creditworthiness and default behavior.
 
-<!-- ![Employment length as risk indicator](./images/screenshots/employment_length.png "Employment lengths as risk indicator") -->
-
-Using a scatter plot we can establish that shorter employment length correlates with higher default rates. Indicating that customers who are employed less than 2 years show increased levels of default rate. 
+<!-- ![Employment length as risk indicator](./images/screenshots/employment_length.png "Employment lengths as risk indicator") --> 
 
 ### How does historical default behavior affect current risk?
 Evaluate whether borrowers with prior defaults are more likely to default again, informing approval policies and risk scoring models.
 
 <!-- ![Historical default behaviour](./images/screenshots/historical_defaults.png "Historical default behaviour") -->
 
-Records with historic defaults have significantly higher default rates overal.  
 
 ### Can we use loan to income ratio to identify high risk accounts?
 Assess whether borrowers with higher loan-to-income ratios are more likely to default, guiding affordability thresholds.
 
 <!-- ![Loan to income ratio](./images/screenshots/loan_to_income.png "Loan to income ratio") -->
 
-While higher loan to income ratios show higher default rates in particular between 0.5 to 0.65 range, may require additional context to increase predictive power. 
 
 ### Which loan intents are most associated with default?
 Analyze default rates across loan purposes (e.g., education, medical, home improvement) to identify high-risk categories and adjust product offerings.
 
 <!-- ![Loan intents and default rate](./images/screenshots/loan_purpose.png "Loan intents and default rate") -->
 
-Default rates are higher for lending taken out for debt consolidation and medical purposes. People who are borrowing to consolidate existing debt or for medical purposes show higher rate of default. Without further information it's impossible to determine whether these are a key factor in defaults. 
-
 ### Do high interest rates affect default rates?
 Investigate whether borrowers with higher interest rates are more likely to default, helping assess the risk-return balance and inform pricing strategies.
 
 <!-- ![Effect of high interest rate rates on default rate](./images/screenshots/interest_rates.png "Effect of high interest rate rates on default rate") -->
-
-There is a clear positive correlation between higher interest rates and default rates. Indicating that customer with higher interest rates are more likely to default. After calculating feature importance interest rates show highest feature importance when attempting to predict default rate. 
 
 ### What is the business impact?
 Quantify the business cost of defaults across high-risk demographics to support strategic lending decisions.
 
 <!-- ![Overal default loss](./images/screenshots/default_business_impact_overall.png "Overal default loss") -->
 
-Business has sustained an overal loss of 52,176,125 from defaulted accounts.
-
 <!-- ![High risk customer default loss](./images/screenshots/default_business_impact_high_risk.png "High risk customer default loss") -->
 
-Based on regression model high risk records potentially will cost the business 23,513,125 in future defaults.
+
 
 ### Predictive modeling
 In order to clasify records by risk level a regression model was implemented within power bi using python using key features like interest_rate, loan_to_income, purpose, residential_status, age, employment_length, historic_defaults_binary (binary value to indicate whether records had historic default. 0 no historic default, 1 having historic defaults). Based on this model achieved AUC score of 0.8 indicating a strong ability to distinguish between default and non default cases. 
+
+![Model Performance Overview Page](./images/screenshots/age_brackets.png "Model Perforamnce Overview Page")
+
+#### Python regression risk modeling code.
+```python
+# 'dataset' holds the input data for this script
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
+
+# Prepare data
+df = dataset.copy()
+
+# Select predictors including correlated features
+X = df[['interest_rate', 'loan_to_income', 'purpose', 'residential_status',
+        'age', 'employment_length', 'historic_defaults_binary']]
+y = df['status_binary']  # Binary target: 0 = no default, 1 = default
+
+# Encode categorical variables
+X = pd.get_dummies(X, columns=['purpose', 'residential_status'], drop_first=True)
+
+# Train logistic regression model
+model = LogisticRegression(max_iter=1000)
+model.fit(X, y)
+
+# Predict risk score (probability of default)
+df['risk_score'] = model.predict_proba(X)[:, 1]
+
+# Apply custom threshold to classify predicted defaults
+threshold = 0.35 
+df['predicted_default'] = (df['risk_score'] > threshold).astype(int)
+
+# Evaluate model performance at this threshold
+y_true = df['status_binary']
+y_pred = df['predicted_default']
+
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+auc = roc_auc_score(y_true, df['risk_score'])
+
+# Output the dataframe with new columns
+dataset = df
+```
 
 What if analysis section has been added by way of a slider allowing to adjust threshold levels for classification of records. 
 

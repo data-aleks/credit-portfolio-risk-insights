@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 762.85714285714289,
+        "x": 0,
         "y": 0
       },
       "nodes": [
@@ -88,8 +88,8 @@
         },
         {
           "location": {
-            "x": 1594.5262856321363,
-            "y": 0
+            "x": 2061.192952298803,
+            "y": 386.66666666666669
           },
           "nodeIndex": "feature_importance",
           "nodeLineageTag": "cd56aa6f-90c5-4ae5-badd-347620c459cc",
@@ -114,7 +114,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 70,
+      "zoomValue": 60,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
