@@ -1,0 +1,1624 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Home Page",
+  "name": "e4a6e4b4026f83fa7456",
+  "options": {
+    "targetVisualNames": []
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "73f2990d0c08ce7a9a14",
+    "sections": {
+      "73f2990d0c08ce7a9a14": {
+        "visualContainers": {
+          "08da0edb60c2ddab720e": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "36c0d39ba0eb579134d8": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a1593e6a6c97ee1f556d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "interest_rate (bins)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d4965b4cf034d8dd00d0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "scatterChart",
+              "objects": {},
+              "activeProjections": {
+                "X": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "interest_rate (bins)"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a441f55ca9c2367b5c7b": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "2ac1be8d02476565ce61": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "447da9df3b2591da61f7": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ce979d8775daae1218c8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a0c74e670fb4a2e13870",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "72a68ee2b9cd6660b10d": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "92202e14c06b9fc59d33": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d1d61e2fb4e69b135706": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "efcff9b1a4db0b9fbb06": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "612a6809ad611cc8e30a",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_client",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 3,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "d"
+                                  }
+                                },
+                                "Property": "Employment Length Bins"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "100L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Employment Length Bins"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9a4ea801a9e7d0a71b16",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "f",
+                        "Entity": "fact_records",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 3,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "f"
+                                  }
+                                },
+                                "Property": "Default Rate"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "1L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9bc54e985e1be7efed06",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "scatterChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "X": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Employment Length Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "5b3349c57580b98a6f65": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "5e8fb42c2918bbc2187f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "50dc41435c204c7419ac",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "High Risk Accounts"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "High Risk Accounts"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "209b7e59b5bc4fdc8dbb": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e99bdcf5f09393de78fb",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "historic_defaults"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a761b7952a6401ce0a7c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "historic_defaults"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "35c44730fa5258c5516d": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d319ea35840a6b3a4929": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "7bacc55815983e8aee4e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7cee212d4e702253770f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "risk_level_static"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bfc51d57dead305e14de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "risk_level_static"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ba215bdf5b2fc7072d0e": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "cf2bdd14c40478e6d22c": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "12e830813804c8d84315": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "9914ac4d3558a5b97963": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "9961d97049d1a6131411": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "048233cd8ff28e2fbdbc",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_purpose"
+                        }
+                      },
+                      "Property": "purpose"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0cfcfb4bbff9ea41d03f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_purpose"
+                        }
+                      },
+                      "Property": "purpose"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "796037064e12e7961367": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "b83af2b39da58ac5501b": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "f44b68d10ab4e024454b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0e861dbdad544ffc86db",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cde62f246120f533df29",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts < 30"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts < 30"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "b5959684fe00a9c4136a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f0be7a036d633d7d55a4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts < 30"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Active Accounts < 30"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "dbc957d0032c52050677": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7328b197d105fc84ec67",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Static High Risk Default Loss"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Static High Risk Default Loss"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "04c775b754f3a0f6c586": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "56e796bc2b887ae147c1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "85fd382fadbc0fb904de": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1a0903921351b10142be",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "f",
+                        "Entity": "fact_records",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 3,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "f"
+                                  }
+                                },
+                                "Property": "Default Rate"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "1L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "545ae6403e240d68cee3",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "f",
+                        "Entity": "fact_records",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "And": {
+                            "Left": {
+                              "Comparison": {
+                                "ComparisonKind": 1,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "f"
+                                      }
+                                    },
+                                    "Property": "loan_to_income"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "0.3D"
+                                  }
+                                }
+                              }
+                            },
+                            "Right": {
+                              "Comparison": {
+                                "ComparisonKind": 4,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "f"
+                                      }
+                                    },
+                                    "Property": "loan_to_income"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "1L"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "loan_to_income"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "15b057cd183c0da58d25",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "loan_to_income (bins)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "ebcb27fafc153138972b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Records"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "loan_to_income (bins)"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "261c714c1151f2d9bffe": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "27190928eb81cd23692c": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "45d8709ffc90729f17f7": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dc2d97051e2f20488456",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "historic_defaults"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Basic'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "historic_defaults"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "c20f87405da7d6a57fa2": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "a3b9c2f13c444972bc47": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "57701ee1c96cafe1e348": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "933271d11b34daf627fe": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c982936c3cfed257b840",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "high_risk_count [dynamic]"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "31a075950457b4dc4e24",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "medium_risk_count [dynamic]"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1f90b3c5fad073a3233f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "low_risk_count [dynamic]"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "treemap",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "high_risk_count [dynamic]"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "9743638860a1e0c3ec83": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2246b81068b540ca4749",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Risk Threshold"
+                        }
+                      },
+                      "Property": "Risk Threshold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "r",
+                                "Entity": "Risk Threshold",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "Comparison": {
+                                    "ComparisonKind": 0,
+                                    "Left": {
+                                      "Column": {
+                                        "Expression": {
+                                          "SourceRef": {
+                                            "Source": "r"
+                                          }
+                                        },
+                                        "Property": "Risk Threshold"
+                                      }
+                                    },
+                                    "Right": {
+                                      "Literal": {
+                                        "Value": "0.35D"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "numericStart": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "0.35D"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Risk Threshold"
+                        }
+                      },
+                      "Property": "Risk Threshold"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a32af42074975b6c4859": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "a8adedb60d78cc848fa9": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d75e849427fe1cc14519": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "c7afa916e360e1fa6fd0",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_client",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 4,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "d"
+                                  }
+                                },
+                                "Property": "Employment Length Bins"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "10L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Employment Length Bins"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Between'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Employment Length Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "df0bc88ea16c7321f801": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "df5b9f49bf46ca3d088d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e776c6c14cbfc58f3aaf",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_grade"
+                        }
+                      },
+                      "Property": "grade"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_grade"
+                        }
+                      },
+                      "Property": "grade"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e831198219eb851a9e91": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "f85fc90af5b670192beb": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "54bd8430fb8263ddafeb",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "dim_client",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 4,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "d"
+                                  }
+                                },
+                                "Property": "Age Bins"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "30L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Between'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "97ca430e890702b0593b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "bedde73c0727a57028e7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5101c3132df30c71963d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_records"
+                        }
+                      },
+                      "Property": "Default Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_client"
+                        }
+                      },
+                      "Property": "Age Bins"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "c008082c510a2315c1a4": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "ec8d17c79ba94b3d8f04": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "2f7ea57708e832b4a20f": {
+            "isHidden": false
+          },
+          "35fb7a98fa93d1d54fbc": {
+            "isHidden": false
+          },
+          "470f9794730921c0d4d0": {
+            "isHidden": false
+          },
+          "8a1e86d4b7b88e31838a": {
+            "isHidden": false
+          },
+          "98bfa59228ed752bf151": {
+            "isHidden": false
+          },
+          "9ecc31df72d1ee70c26a": {
+            "isHidden": false
+          },
+          "b544709eb9898f63eba5": {
+            "isHidden": false
+          },
+          "dccb913c3b3f3f4befc5": {
+            "isHidden": false
+          },
+          "df7deb5a7797006771ea": {
+            "isHidden": false
+          },
+          "f988591f03a14048cdd6": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

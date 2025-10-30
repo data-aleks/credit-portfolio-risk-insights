@@ -6,7 +6,8 @@
     "y": 1021.1111111111111,
     "z": 13001,
     "height": 40,
-    "width": 376.66666666666669
+    "width": 376.66666666666669,
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "actionButton",
@@ -77,6 +78,33 @@
               "expr": {
                 "Literal": {
                   "Value": "'Model'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'efa443675b0fdf402ffe'"
                 }
               }
             }

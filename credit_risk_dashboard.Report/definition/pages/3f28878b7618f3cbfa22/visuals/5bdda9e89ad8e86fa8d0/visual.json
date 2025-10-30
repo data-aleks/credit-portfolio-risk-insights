@@ -4,9 +4,10 @@
   "position": {
     "x": 16,
     "y": 18,
-    "z": 2004,
+    "z": 4000,
     "height": 58,
-    "width": 58
+    "width": 58,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "actionButton",
@@ -24,6 +25,35 @@
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'e4a6e4b4026f83fa7456'"
+                }
+              }
+            }
           }
         }
       ]

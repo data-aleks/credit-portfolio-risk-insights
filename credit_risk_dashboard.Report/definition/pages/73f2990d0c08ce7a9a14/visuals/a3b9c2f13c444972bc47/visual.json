@@ -3,10 +3,11 @@
   "name": "a3b9c2f13c444972bc47",
   "position": {
     "x": 290,
-    "y": 21.666666666666668,
+    "y": 23.333333333333336,
     "z": 12501,
-    "height": 50,
-    "width": 106.66666666666667
+    "height": 43.333333333333336,
+    "width": 106.66666666666667,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "actionButton",
@@ -94,7 +95,7 @@
             "type": {
               "expr": {
                 "Literal": {
-                  "Value": "'ClearAllSlicers'"
+                  "Value": "'Bookmark'"
                 }
               }
             },
@@ -102,6 +103,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Clear all slicers on this page'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'e4a6e4b4026f83fa7456'"
                 }
               }
             }
