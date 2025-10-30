@@ -133,7 +133,7 @@ dataset = df
 
 What if analysis section has been added by way of a slider allowing to adjust threshold levels for classification of records. 
 
-![What if functionality](./images/screenshots/what_if.png" What if functionality")
+![What if functionality](./images/screenshots/what_if.png "What if functionality")
 
 
 ## Business Recommendation
