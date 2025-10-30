@@ -45,8 +45,6 @@ Identify borrower age groups with elevated default rates to refine targeting and
 
 ![Default rates by age brackets](./images/visualisations/default_rate_by_age_brackets.png "Default rates by age brackets")
 
-Based on data we can establish that there is an increased number of defaults for ages between 22 and 24 years old for young people ( people aged below 30 years old ). This indicates that lending to people in this age bracket carries increased risk of default.
-
 ### Can employment length act as a risk indicator?
 Explore how job stability influences creditworthiness and default behavior.
 
@@ -137,3 +135,33 @@ What if analysis section has been added by way of a slider allowing to adjust th
 
 
 ## Business Recommendation
+
+1. Targeted Risk Controls for Young Borrowers
+- Borrowers aged 22–24, particularly those aged 21, exhibit the highest default rate at 30.38%, representing a potential loss of £2.55M.
+- Recommendation: Implement stricter loan assessments and limit exposure to high-risk loan purposes for this age group. Cap interest rates below 13% to reduce default probability.
+- Adopt a proactive engagement strategy: provide financial education, offer incentives, and partner with lifestyle brands to deliver added value (e.g., discounts, freebies). The goal is not to restrict lending, but to prevent defaults through support and tailored products.
+
+2. Enhanced Screening for Applicants with Prior Defaults
+- Accounts with historic defaults show default rates exceeding 70%, indicating high vulnerability.
+- Recommendation: Apply manual underwriting, require additional documentation, and consider collateral-backed lending. Rather than excluding these borrowers, adopt a mentorship approach—offer short-term interest rate reductions for successful repayments, provide educational resources, and allow flexible repayment options (e.g., payment pauses during hardship). These customers should be approached with care and empathy.
+
+3. Loan Purpose Risk Management
+- Medical and Debt Consolidation loans have the highest number of defaults. For applicants with prior defaults, these loan types approach a 100% default rate.
+- Recommendation: Enforce stricter eligibility criteria, require guarantors, and apply manual underwriting. Avoid high interest rates—keeping rates below 13% can reduce default risk by approximately 20%.
+
+4. Interest Rate Optimization
+- Interest rate is the strongest predictor of default. Accounts with rates above 13% show a 20% increase in default probability.
+- Recommendation: Reassess pricing strategies to avoid pushing borrowers into riskier territory. Introduce flexible interest rate products (e.g., fixed vs. variable), and allow borrowers to opt into lower-rate periods to reduce risk and attract new customers.
+
+5. Employment Length as a Risk Signal
+- Borrowers with less than 2 years of employment history show elevated default rates.
+- Recommendation: Introduce guarantor requirements, secured lending options, or probationary loan tiers. Further data collection on employment type and contract stability is recommended to refine risk scoring.
+
+6. Portfolio-Level Risk Exposure
+- The business is currently exposed to a potential loss of £4.29M from 298 high-risk accounts, as identified by the regression model.
+- Recommendation: Prioritize these accounts for early intervention, restructuring, or proactive outreach. Offer incentives for good repayment behavior, provide financial education, and allow temporary payment deferrals without penalizing credit scores—especially in cases of life changes or hardship.
+
+7. Loan-to-Income Ratio Monitoring
+- While not the strongest predictor, there is a noticeable uptick in defaults for accounts with LTI ratios between 0.5 and 0.6.
+- Recommendation: Monitor this bracket closely and consider integrating LTI thresholds into the risk scoring framework to improve affordability checks.
+
