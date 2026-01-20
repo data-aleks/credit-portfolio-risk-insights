@@ -103,7 +103,7 @@ table fact_records
 		lineageTag: d5c67d8b-f620-42c8-af25-ee26523ed2b4
 
 	measure 'Overall Default Rate' = fact_records[Default Accounts] / fact_records[All accounts]
-		formatString: 0%;-0%;0%
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: f4352f67-55b5-4405-8191-f26f6fc14db8
 
 	measure 'Active Over 30 Accounts' = ```
