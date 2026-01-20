@@ -10,7 +10,7 @@
     "tabOrder": 3000
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "columnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -217,24 +217,50 @@
       ],
       "labels": [
         {
+          "properties": {}
+        }
+      ],
+      "valueAxis": [
+        {
           "properties": {
-            "labelStyle": {
+            "titleText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Data'"
+                  "Value": "'Default Rate (%)'"
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
                 }
               }
             }
           }
         }
       ],
-      "slices": [
+      "categoryAxis": [
         {
           "properties": {
-            "innerRadiusRatio": {
+            "titleText": {
               "expr": {
                 "Literal": {
-                  "Value": "75L"
+                  "Value": "'Prior Defaults'"
+                }
+              }
+            },
+            "titleFontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "titleBold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
