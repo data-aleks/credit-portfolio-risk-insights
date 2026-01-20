@@ -1,8 +1,6 @@
 # Credit Portfolio Risk & Performance Insights
 A business intelligence case study using Power BI and data analytics
 
-![Power BI Dashboard](./images/screenshots/main_dashboard.png "Credit Portfolio Risk & Performance Insights")
-
 ## Table of Contents
 - [Executive Summary](#executive-summary)
 - [Key Insights From Data](#key-insights-from-data)
