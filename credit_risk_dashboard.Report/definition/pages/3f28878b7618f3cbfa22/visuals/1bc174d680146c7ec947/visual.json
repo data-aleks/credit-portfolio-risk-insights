@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "1bc174d680146c7ec947",
   "position": {
     "x": 126,
@@ -7,7 +7,7 @@
     "z": 1000,
     "height": 392,
     "width": 336,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visualGroup": {
     "displayName": "Group 1",

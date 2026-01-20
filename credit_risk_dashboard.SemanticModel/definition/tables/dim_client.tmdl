@@ -80,7 +80,7 @@ table dim_client
 			IF(
 				ISBLANK('dim_client'[age]),
 				BLANK(),
-				INT('dim_client'[age])
+				INT('dim_client'[age] / 10) * 10
 			)
 		formatString: 0
 		lineageTag: 2a49264d-8a3d-4fff-9873-54350a2b96f3
@@ -103,13 +103,13 @@ table dim_client
 				  ],
 				  "binningMetadata": {
 				    "binSize": {
-				      "value": 1.0,
+				      "value": 10.0,
 				      "unit": 0
 				    }
 				  }
 				}
 
-		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"dim_client"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}},"Size":1.0}}}}
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"dim_client"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"age"}},"Size":10.0}}}}
 
 		annotation SummarizationSetBy = Automatic
 

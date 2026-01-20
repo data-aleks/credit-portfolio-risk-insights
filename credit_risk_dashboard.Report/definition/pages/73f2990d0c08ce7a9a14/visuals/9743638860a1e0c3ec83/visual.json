@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "9743638860a1e0c3ec83",
   "position": {
     "x": 20,
@@ -7,7 +7,7 @@
     "z": 6000,
     "height": 86,
     "width": 376,
-    "tabOrder": 3000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -41,7 +41,7 @@
             "numericStart": {
               "expr": {
                 "Literal": {
-                  "Value": "0.35D"
+                  "Value": "0.2D"
                 }
               }
             }
@@ -78,7 +78,7 @@
                         },
                         "Right": {
                           "Literal": {
-                            "Value": "0.35D"
+                            "Value": "0.2D"
                           }
                         }
                       }
@@ -131,6 +131,11 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Risk Threshold",
+      "fieldChanges": true,
+      "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   },

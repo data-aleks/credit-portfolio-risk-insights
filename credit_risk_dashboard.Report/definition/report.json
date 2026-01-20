@@ -64,6 +64,17 @@
           "type": "CustomTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "predictive_model_static_image8090196254683496.jpg",
+          "path": "predictive_model_static_image8090196254683496.jpg",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {

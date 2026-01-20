@@ -6,7 +6,7 @@ table fact_records
 			CALCULATE(
 			    DISTINCTCOUNT(fact_records[record_id]),
 			    FILTER(dim_status, dim_status[status] = "Default"),
-			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(dim_client, dim_client[age] < 30),
 			    FILTER(dim_client, dim_client[employment_length] < 11)
 			)
 		formatString: 0
@@ -41,7 +41,7 @@ table fact_records
 			CALCULATE(
 			    SUM(fact_records[amount]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
-			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(dim_client, dim_client[age] < 30),
 			    FILTER(dim_client, dim_client[employment_length] < 11)
 			) 
 			```
@@ -103,7 +103,7 @@ table fact_records
 		lineageTag: d5c67d8b-f620-42c8-af25-ee26523ed2b4
 
 	measure 'Overall Default Rate' = fact_records[Default Accounts] / fact_records[All accounts]
-		formatString: 0.00%;-0.00%;0.00%
+		formatString: 0%;-0%;0%
 		lineageTag: f4352f67-55b5-4405-8191-f26f6fc14db8
 
 	measure 'Active Over 30 Accounts' = ```
@@ -117,7 +117,7 @@ table fact_records
 			CALCULATE(
 			    DISTINCTCOUNT(fact_records[record_id]), 
 			    FILTER(dim_status, dim_status[status] = "Active"), 
-			    FILTER(dim_client, dim_client[age] <= 30),
+			    FILTER(dim_client, dim_client[age] < 30),
 			    FILTER(dim_client, dim_client[employment_length] < 11)
 			) 
 			```
@@ -324,6 +324,22 @@ table fact_records
 		displayFolder: [Classification Comparison]
 		lineageTag: 31ac7ef5-42e1-410f-9d4d-780dfd82daf6
 
+	measure 'Weighted Avg Interest Rate' = ```
+			
+			VAR TotalInterestProduct = 
+			    SUMX(
+			        fact_records, 
+			        fact_records[amount] * fact_records[interest_rate]
+			    )
+			VAR TotalBalance = 
+			    SUM(fact_records[amount])
+			
+			RETURN 
+			    DIVIDE(TotalInterestProduct, TotalBalance, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: aee64fb0-aa66-460f-bb17-877f655d7692
+
 	column record_id
 		dataType: int64
 		formatString: 0
@@ -405,13 +421,12 @@ table fact_records
 
 	column loan_to_income
 		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: f689e3d7-16d4-44bf-9cc9-1ce19e5d558b
 		summarizeBy: sum
 		sourceColumn: loan_to_income
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"fact_records","TableItemName":"loan_to_income (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
 
@@ -434,6 +449,7 @@ table fact_records
 					ROUNDUP('fact_records'[loan_to_income] / 0.05, 0) * 0.05
 				)
 			)
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 985a94f7-aa45-44aa-ac15-04fd5fb1aeae
 		summarizeBy: none
 
@@ -463,8 +479,6 @@ table fact_records
 		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"f","Entity":"fact_records"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"loan_to_income"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"loan_to_income"}},"Size":0.05}}}}
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column 'interest_rate (bins)' =
 			IF(
